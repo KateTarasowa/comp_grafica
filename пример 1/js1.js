@@ -4,7 +4,7 @@ function init() {
   var ctx = canvas.getContext('2d');
   ctx.fillStyle = "red";
   ctx.fillRect(10,10,100,200);  
-  ctx.strokeStyle = "rgba(0, 255, 0, 0.5)";
+  ctx.strokeStyle = "rgba(0, 251, 0, 0.5)";
   ctx.lineWidth = 11;
   ctx.lineJoin = "round";
   ctx.strokeRect(20 , 40,190,100);
