@@ -19,11 +19,15 @@ function init() {
   var now = currentTime();
   var passed = now-whenLastFrame;
   whenLastFrame = now;
-  if (circleX> 500) circleX=-circleVY;
-  if(circleY>400) circleY=-circleVX;
+  if ((circleX  > 400 || circleX < 20) && (circleY > 280 || circleY < 20)) {circleVY = - circleVY; circleVX = - circleVX;}
+  else{
+  if (circleX + 10 > 410) circleVX=-circleVX;
+  if(circleY + 10 > 290) circleVY=-circleVY;
+  if (circleX - 10 < 10) circleVX=-circleVX;
+  if(circleY - 10 < 10) circleVY=-circleVY;}
   circleX = circleX +passed * circleVX/ 1000;
   circleY = circleY +passed * circleVY/ 1000;
-  ctx.fillRect(10,10,400,500);
+  ctx.fillRect(10,10,400,280);
   //circleX += 1;
   }
   function drawFrame() {
