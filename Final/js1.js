@@ -21,6 +21,7 @@ function init() {
     var WIDTH = canvas.width;
     var HEIGHT = canvas.height;
 	var blocks = [ {x: Random(min,max), y: 0, num: Random(min_n,max_n)}, {x: Random(min,max), y: 0, num: Random(min_n,max_n)}, {x: Random(min,max), y: 0, num: Random(min_n,max_n)} ];
+	
 	BG.graphics
 		.clear()
 		.beginFill("#000000")
@@ -48,9 +49,13 @@ function init() {
 			//s.fillText(blocks[i].num, blocks[i].x * koeff + w / 2, blocks[i].y * koeff + h / 2 );
 		 blocks[i].txt = new createjs.Text(blocks[i].num);  
 		blocks[i].txt.font = "20px Arial";
+	blocks[i].txt.textAlign = "center";
+		blocks[i].txt.textBaseline = "middle";
+		
 		blocks[i].txt.color = "black";
-		blocks[i].txt.x = blocks[i].xx;
-		blocks[i].txt.y = blocks[i].yy;
+		blocks[i].txt.x = blocks[i].xx + w / 2;
+		blocks[i].txt.y = blocks[i].yy + h / 2;
+	
 		stage.addChild(blocks[i].block);
 		stage.addChild(blocks[i].txt);
 	}
@@ -59,9 +64,12 @@ function init() {
 		stage.removeChild(blocks[i].txt);
 		blocks[i].txt = new createjs.Text(num);	  
 		blocks[i].txt.font = "20px Arial";
+		blocks[i].txt.textAlign = "center";
+		blocks[i].txt.textBaseline = "middle";
+		
 		blocks[i].txt.color = "black";
-		blocks[i].txt.x = blocks[i].xx;
-		blocks[i].txt.y = blocks[i].yy;
+		blocks[i].txt.x = blocks[i].xx + w / 2;
+		blocks[i].txt.y = blocks[i].yy + h / 2;
 		stage.addChild(blocks[i].txt);
 	}
 	function delet(i){
@@ -75,15 +83,18 @@ function init() {
 		
 		if (ball.y + ball.r >= HEIGHT) {
 			state = 1;
+			zdvig();
+			
 			stage.addEventListener('stagemousedown', 
 			function(e) {
 				console.log("dggdg");
-				ball.vx = ((e.mouseX - ball.x) / Math.sqrt((e.mouseX - ball.x) * (e.mouseX - ball.x) + (e.mouseY - ball.y) * (e.mouseY - ball.y))) * 5;
-				ball.vy = ((e.mouseY - ball.y) / Math.sqrt((e.mouseY - ball.y) * (e.mouseY - ball.y) + (e.mouseX - ball.x) * (e.mouseX - ball.x))) * 5;
-				console.log( ball.vx , ball.vy);
+				ball.vx = ((stage.mouseX - ball.x) / Math.sqrt((stage.mouseX - ball.x) * (stage.mouseX - ball.x) + (stage.mouseY - ball.y) * (stage.mouseY - ball.y))) * 12;
+				ball.vy = ((-stage.mouseY + ball.y) / Math.sqrt((stage.mouseY - ball.y) * (stage.mouseY - ball.y) + (stage.mouseX - ball.x) * (stage.mouseX - ball.x))) * 12;
+				console.log( stage.mouseX);
 				state = 0;
-				zdvig();
+				
 			});
+			
 			
 		}
 	}
